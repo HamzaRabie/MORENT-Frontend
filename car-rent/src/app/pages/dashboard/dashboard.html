@@ -1,0 +1,11 @@
+<div class="layout">
+  <div class="main">
+    <div class="left-panel">
+      <app-details-rental [booking]="activeBooking" />
+    </div>
+    <div class="right-panel">
+      <app-top-cars [data]="topCategories"/>
+      <app-recent-transactions [transactions]="recentBookings" />
+    </div>
+  </div>
+</div>

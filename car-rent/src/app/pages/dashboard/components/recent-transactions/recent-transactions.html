@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-header">
+    <span class="title">Recent Transaction</span>
+    <span class="view-all">View All</span>
+  </div>
+
+  <div class="list">
+    @for (item of transactions; track item.id) {
+      <div class="transaction-item">
+        <img [src]="item.imageUrl" [alt]="item.carName" class="car-img" />
+        <div class="info">
+          <span class="car-name">{{ item.carName }}</span>
+          <span class="category">{{ item.category }}</span>
+        </div>
+        <div class="right">
+          <span class="date">{{ item.pickupDate | date: 'd MMM' }}</span>
+          <span class="price">{{ item.totalPrice | currency }}</span>
+        </div>
+      </div>
+    }
+  </div>
+</div>

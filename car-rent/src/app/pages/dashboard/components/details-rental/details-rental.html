@@ -1,0 +1,76 @@
+@if (booking) {
+  <div class="card">
+    <h3 class="card-title">Details Rental</h3>
+
+    <!-- Map placeholder -->
+   <div id="rental-map" class="map"></div>
+
+    <!-- Car info -->
+    <div class="car-info">
+      <img [src]="booking.imageUrl" [alt]="booking.carName" class="car-img" />
+      <div class="car-meta">
+        <span class="car-name">{{ booking.carName }}</span>
+        <span class="car-category">{{ booking.category }}</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Pick-Up -->
+    <div class="section-label">
+      <span class="dot blue"></span>
+      <span>Pick - Up</span>
+    </div>
+    <div class="row-grid">
+      <div class="field">
+        <span class="field-label">Locations</span>
+        <span class="field-value">{{ booking.pickupLocation }}</span>
+      </div>
+      <div class="field">
+        <span class="field-label">Date</span>
+        <span class="field-value">{{ booking.pickupDate | date: 'd MMMM yyyy' }}</span>
+      </div>
+      <div class="field">
+        <span class="field-label">Time</span>
+        <span class="field-value">{{ booking.pickupTime }}</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Drop-Off -->
+    <div class="section-label">
+      <span class="dot light"></span>
+      <span>Drop - Off</span>
+    </div>
+    <div class="row-grid">
+      <div class="field">
+        <span class="field-label">Locations</span>
+        <span class="field-value">{{ booking.dropoffLocation }}</span>
+      </div>
+      <div class="field">
+        <span class="field-label">Date</span>
+        <span class="field-value">{{ booking.dropoffDate | date: 'd MMMM yyyy' }}</span>
+      </div>
+      <div class="field">
+        <span class="field-label">Time</span>
+        <span class="field-value">{{ booking.dropoffTime }}</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Total -->
+    <div class="total-row">
+      <div>
+        <span class="total-label">Total Rental Price</span>
+        <span class="total-sub">Overall price and includes rental discount</span>
+      </div>
+      <span class="total-price">{{ booking.totalPrice | currency }}</span>
+    </div>
+  </div>
+} @else {
+  <div class="card empty">
+    <span>No active booking found.</span>
+  </div>
+}

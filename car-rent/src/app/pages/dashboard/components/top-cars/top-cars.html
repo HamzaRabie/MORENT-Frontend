@@ -1,0 +1,28 @@
+<div class="card">
+  <div class="card-header">
+    <span class="title">Top 5 Car Rental</span>
+    <span class="dots">···</span>
+  </div>
+
+  <div class="body">
+    <div class="chart-wrapper">
+      <canvas #donutCanvas></canvas>
+      <div class="chart-center">
+        <span class="total">{{ total }}</span>
+        <span class="label">Rental Car</span>
+      </div>
+    </div>
+
+    <div class="legend">
+     <div class="legend">
+        @for (item of data; track item.category; let i = $index) {
+        <div class="legend-item">
+        <span class="dot" [style.background]="colors[i]"></span>
+        <span class="name">{{ item.category }}</span>
+        <span class="count">{{ item.count.toLocaleString() }}</span>
+    </div>
+    } 
+</div>
+    </div>
+  </div>
+</div>
