@@ -1,0 +1,64 @@
+.page {
+  background: #f6f7f9;
+  flex: 1; 
+}
+
+.search-section {
+  padding: 24px 24px 0;
+}
+
+.content {
+  display: flex;
+  gap: 24px;
+  padding: 24px;
+  align-items: flex-start;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.car-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px;
+  color: #90a3bf;
+  font-size: 15px;
+}
+
+.bottom-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 8px 0 24px;
+}
+
+.show-more {
+  background: #3563E9;
+  color: #fff;
+  border: none;
+  padding: 12px 40px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .2s;
+  &:hover { background: #2450c8; }
+}
+
+.total-count {
+  position: absolute;
+  right: 0;
+  font-size: 13px;
+  color: #90a3bf;
+}

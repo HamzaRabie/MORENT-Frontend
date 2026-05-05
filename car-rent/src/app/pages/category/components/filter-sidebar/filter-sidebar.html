@@ -1,0 +1,53 @@
+<div class="sidebar">
+
+  <!-- Type -->
+  <div class="filter-group">
+    <span class="group-label">TYPE</span>
+    @for (cat of categories; track cat) {
+      <label class="check-item" (click)="selectCategory(cat)">
+        <span class="custom-check" [class.checked]="selectedCategory === cat">
+          @if (selectedCategory === cat) {
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+              <path d="M2 5l2.5 2.5L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          }
+        </span>
+        <span class="label-text" [class.active]="selectedCategory === cat">
+          {{ cat }}
+        </span>
+      </label>
+    }
+  </div>
+
+  <!-- Capacity -->
+  <div class="filter-group">
+    <span class="group-label">CAPACITY</span>
+    @for (cap of capacities; track cap) {
+      <label class="check-item" (click)="selectCapacity(cap)">
+        <span class="custom-check" [class.checked]="selectedSeats === cap">
+          @if (selectedSeats === cap) {
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+              <path d="M2 5l2.5 2.5L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          }
+        </span>
+        <span class="label-text" [class.active]="selectedSeats === cap">
+          {{ cap === 8 ? '8 or More' : cap + ' Person' }}
+        </span>
+      </label>
+    }
+  </div>
+
+  <!-- Price -->
+  <div class="filter-group">
+    <span class="group-label">PRICE</span>
+    <input
+      type="range"
+      min="60"
+      max="160"
+      [value]="maxPrice"
+      (input)="onPriceChange($event)" />
+    <span class="price-label">Max. ${{ maxPrice }}.00</span>
+  </div>
+
+</div>

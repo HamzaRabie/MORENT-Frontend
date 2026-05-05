@@ -1,0 +1,61 @@
+<div class="card">
+
+  <!-- Header -->
+  <div class="card-header">
+    <div class="car-info">
+      <span class="car-name">{{ car.brand }} {{ car.model }}</span>
+      <span class="car-category">{{ car.category }}</span>
+    </div>
+    <button class="fav-btn" (click)="toggleFavorite()">
+      @if (isFavorite) {
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#ED3F3F" stroke="#ED3F3F" stroke-width="1.5">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      } @else {
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#90A3BF" stroke-width="1.5">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      }
+    </button>
+  </div>
+
+  <!-- Image -->
+  <div class="car-image">
+    <img [src]="mediaUrl+car.imageUrl" [alt]="car.brand + ' ' + car.model" />
+  </div>
+
+  <!-- Specs -->
+  <div class="specs">
+    <div class="spec-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#90A3BF" stroke-width="1.5">
+        <path d="M3 22V8l9-6 9 6v14"/><path d="M9 22V12h6v10"/>
+      </svg>
+      <span>{{ car.fuelCapacity }}L</span>
+    </div>
+    <div class="spec-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#90A3BF" stroke-width="1.5">
+        <circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4"/>
+      </svg>
+      <span>{{ car.transmission }}</span>
+    </div>
+    <div class="spec-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#90A3BF" stroke-width="1.5">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+      <span>{{ car.seats }} People</span>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="card-footer">
+    <div class="price">
+      <span class="current-price">{{ car.pricePerDay | currency }}<span class="per-day">/day</span></span>
+      @if (car.originalPrice) {
+        <span class="original-price">{{ car.originalPrice | currency }}</span>
+      }
+    </div>
+    <button class="rent-btn">Rent Now</button>
+  </div>
+
+</div>

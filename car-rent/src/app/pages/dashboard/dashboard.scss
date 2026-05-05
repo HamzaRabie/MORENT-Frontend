@@ -1,7 +1,7 @@
 .layout {
   display: flex;
-  height: 100vh;
   background: #F6F7F9;
+  flex: 1; // remove height: 100vh
 }
 .main {
   display: flex;

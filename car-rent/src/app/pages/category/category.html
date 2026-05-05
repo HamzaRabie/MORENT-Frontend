@@ -1,0 +1,33 @@
+<div class="page">
+
+
+  <div class="content">
+
+    <!-- Sidebar -->
+    <app-filter-sidebar (filtersChanged)="onFiltersChanged($event)" />
+
+    <!-- Main -->
+    <div class="main">
+
+      <!-- Car Grid -->
+      <div class="car-grid">
+        @for (car of cars; track car.id) {
+          <app-car-card [car]="car" />
+        }
+
+        @if (cars.length === 0) {
+          <div class="empty">No cars found.</div>
+        }
+      </div>
+
+      <!-- Bottom -->
+      <div class="bottom-bar">
+        @if (cars.length < total) {
+          <button class="show-more" (click)="showMore()">Show more car</button>
+        }
+        <span class="total-count">{{ total }} Car</span>
+      </div>
+
+    </div>
+  </div>
+</div>
