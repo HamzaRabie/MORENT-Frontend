@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import * as L from 'leaflet';
+import { environment } from '../../../../../environments/environment.development';
 
 @Component({
   selector: 'app-details-rental',
@@ -11,6 +12,7 @@ import * as L from 'leaflet';
 export class DetailsRental {
   @Input() booking: any = null;
   private map: L.Map | null = null;
+  mediaUrl = environment.mediaURLrl;
 
    ngOnChanges(changes: SimpleChanges) {
     if (changes['booking'] && this.booking) {

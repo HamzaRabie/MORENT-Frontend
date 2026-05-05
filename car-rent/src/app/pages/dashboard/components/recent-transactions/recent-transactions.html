@@ -7,7 +7,7 @@
   <div class="list">
     @for (item of transactions; track item.id) {
       <div class="transaction-item">
-        <img [src]="item.imageUrl" [alt]="item.carName" class="car-img" />
+        <img [src]="mediaUrl +item.imageUrl" [alt]="item.carName" class="car-img" />
         <div class="info">
           <span class="car-name">{{ item.carName }}</span>
           <span class="category">{{ item.category }}</span>
