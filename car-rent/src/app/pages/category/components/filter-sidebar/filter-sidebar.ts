@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CarFilters } from '../../../../models/filters.model';
 
 @Component({
@@ -9,7 +9,7 @@ import { CarFilters } from '../../../../models/filters.model';
 })
 export class FilterSidebar {
   @Output() filtersChanged = new EventEmitter<CarFilters>();
-
+  @Input() isOpen = false;
   //to do => get from API
   categories = ['Sport Car', 'Luxury', 'Super Car'];
   capacities = [2, 4, 6, 8];

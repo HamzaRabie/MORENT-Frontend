@@ -1,3 +1,24 @@
+// add this to existing scss
+@media (max-width: 768px) {
+  .row-grid {
+    grid-template-columns: 1fr 1fr; // 2 columns instead of 3
+    gap: 8px;
+  }
+
+  .map {
+    height: 180px;
+  }
+
+  .total-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+
+    .total-price { font-size: 22px; }
+  }
+}
+
+
 .card {
   background: #fff;
   border-radius: 16px;
@@ -109,4 +130,63 @@
   height: 220px;
   border-radius: 12px;
   z-index: 0;
+}
+@media (max-width: 768px) {
+  .card {
+    padding: 16px;
+  }
+
+  .map {
+    height: 180px;
+  }
+
+  .car-info {
+    .car-img {
+      width: 90px;
+      height: 55px;
+    }
+    .car-name { font-size: 15px; }
+  }
+
+  // stack each field vertically
+  .row-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .field {
+    background: #f6f7f9;
+    border-radius: 8px;
+    padding: 10px 14px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .field-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1a202c;
+    }
+
+    .field-value {
+      font-size: 13px;
+      color: #90a3bf;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      &::after {
+        content: '⌄';
+        font-size: 12px;
+        color: #90a3bf;
+      }
+    }
+  }
+
+  .total-row {
+    flex-direction: row;
+    align-items: center;
+
+    .total-price { font-size: 22px; }
+  }
 }

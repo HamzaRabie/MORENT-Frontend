@@ -76,3 +76,22 @@ input[type="range"] {
   font-weight: 600;
   color: #1a202c;
 }
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 280px;
+    border-radius: 0;
+    z-index: 201;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform .3s ease;
+
+    &.open {
+      transform: translateX(0);
+    }
+  }
+}

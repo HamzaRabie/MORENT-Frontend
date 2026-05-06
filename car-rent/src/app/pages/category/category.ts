@@ -13,11 +13,16 @@ import { FilterSidebar } from './components/filter-sidebar/filter-sidebar';
   styleUrl: './category.scss',
 })
 export class Category implements OnInit  {
+  sidebarOpen = false;
   cars : Car[] =[];
   total = 0;
   page = 1;
   filters:CarFilters = {category :'', price:60 , seatsNo :null};
   constructor(private carService : CarService , private cdr:ChangeDetectorRef){}
+
+
+  openSidebar() { this.sidebarOpen = true; }
+  closeSidebar() { this.sidebarOpen = false; }
 
   ngOnInit(): void {
     this.loadCars();

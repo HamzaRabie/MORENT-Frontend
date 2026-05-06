@@ -1,8 +1,9 @@
 .layout {
   display: flex;
-  background: #F6F7F9;
-  flex: 1; // remove height: 100vh
+  background: #f6f7f9;
+  flex: 1;
 }
+
 .main {
   display: flex;
   gap: 24px;
@@ -10,5 +11,30 @@
   flex: 1;
   overflow: auto;
 }
-.left-panel { flex: 1.2; display: flex; flex-direction: column; }
-.right-panel { flex: 1; display: flex; flex-direction: column; gap: 24px; }
+
+.left-panel {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .left-panel, .right-panel {
+    flex: none;
+    width: 100%;
+  }
+}

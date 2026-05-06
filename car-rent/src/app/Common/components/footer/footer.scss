@@ -84,4 +84,33 @@
       &:hover { color: #3563E9; }
     }
   }
+  
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 32px 20px 20px;
+  }
+
+  .footer-top {
+    flex-wrap: wrap;
+    gap: 32px;
+
+    .brand-col {
+      flex: 0 0 100%; // full width
+    }
+
+    .link-col {
+      flex: 1;
+      min-width: 120px;
+    }
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+
+    .legal { gap: 16px; }
+  }
 }

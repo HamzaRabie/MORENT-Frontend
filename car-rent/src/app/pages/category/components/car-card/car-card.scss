@@ -120,3 +120,12 @@
 
   &:hover { background: #2450c8; }
 }
+
+@media (max-width: 768px) {
+  .card { padding: 14px; }
+  .car-name { font-size: 14px; }
+  .car-image { height: 100px; }
+  .spec-item span { font-size: 11px; }
+  .current-price { font-size: 15px; }
+  .rent-btn { padding: 8px 12px; font-size: 12px; }
+}

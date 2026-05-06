@@ -2,32 +2,41 @@
 
 
   <div class="content">
+    <!-- sidebar — hidden on mobile, shown on desktop -->
+    <div class="sidebar-wrapper" [class.open]="sidebarOpen">
+      <div class="sidebar-overlay" (click)="closeSidebar()"></div>
+      <app-filter-sidebar [isOpen]="sidebarOpen"(filtersChanged)="onFiltersChanged($event)" />
+    </div>
 
-    <!-- Sidebar -->
-    <app-filter-sidebar (filtersChanged)="onFiltersChanged($event)" />
-
-    <!-- Main -->
     <div class="main">
+      <!-- mobile filter button -->
+      <div class="mobile-toolbar">
+        <button class="filter-btn" (click)="openSidebar()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="4" y1="6" x2="20" y2="6"/>
+            <line x1="8" y1="12" x2="16" y2="12"/>
+            <line x1="11" y1="18" x2="13" y2="18"/>
+          </svg>
+          Filters
+        </button>
+        <span class="total-count">{{ total }} Cars</span>
+      </div>
 
-      <!-- Car Grid -->
       <div class="car-grid">
         @for (car of cars; track car.id) {
           <app-car-card [car]="car" />
         }
-
         @if (cars.length === 0) {
           <div class="empty">No cars found.</div>
         }
       </div>
 
-      <!-- Bottom -->
       <div class="bottom-bar">
         @if (cars.length < total) {
           <button class="show-more" (click)="showMore()">Show more car</button>
         }
-        <span class="total-count">{{ total }} Car</span>
+        <span class="total-count-bottom">{{ total }} Car</span>
       </div>
-
     </div>
   </div>
 </div>

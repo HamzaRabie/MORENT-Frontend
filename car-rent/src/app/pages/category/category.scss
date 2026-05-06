@@ -1,6 +1,6 @@
 .page {
   background: #f6f7f9;
-  flex: 1; 
+  flex: 1;
 }
 
 .search-section {
@@ -14,6 +14,16 @@
   align-items: flex-start;
 }
 
+// ─── Sidebar wrapper ────────────────────────────────
+.sidebar-wrapper {
+  flex-shrink: 0;
+}
+
+.sidebar-overlay {
+  display: none;
+}
+
+// ─── Main ───────────────────────────────────────────
 .main {
   flex: 1;
   display: flex;
@@ -21,9 +31,33 @@
   gap: 24px;
 }
 
+// ─── Mobile toolbar ─────────────────────────────────
+.mobile-toolbar {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a202c;
+  cursor: pointer;
+  transition: background .2s;
+  &:hover { background: #f6f7f9; }
+}
+
+// ─── Car grid ───────────────────────────────────────
 .car-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
 }
 
@@ -35,6 +69,7 @@
   font-size: 15px;
 }
 
+// ─── Bottom bar ─────────────────────────────────────
 .bottom-bar {
   display: flex;
   justify-content: center;
@@ -56,9 +91,55 @@
   &:hover { background: #2450c8; }
 }
 
-.total-count {
+.total-count-bottom {
   position: absolute;
   right: 0;
   font-size: 13px;
   color: #90a3bf;
+}
+
+// ─── Responsive ─────────────────────────────────────
+@media (max-width: 768px) {
+  .search-section { padding: 16px 16px 0; }
+
+  .content {
+    padding: 16px;
+    gap: 0;
+  }
+
+  // hide sidebar from flow on mobile
+  .sidebar-wrapper {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .3s;
+
+    &.open {
+      pointer-events: all;
+      opacity: 1;
+
+      .sidebar-overlay {
+        display: block;
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.4);
+      }
+    }
+  }
+
+  // show filter button
+  .mobile-toolbar {
+    display: flex;
+    margin-bottom: 8px;
+  }
+
+  .total-count { font-size: 13px; color: #90a3bf; }
+
+  // 1 car per row
+  .car-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
 }
