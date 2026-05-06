@@ -1,12 +1,12 @@
-<div class="card">
-
+<div class="card" [routerLink]="['/cars', car.id]">
+  
   <!-- Header -->
   <div class="card-header">
     <div class="car-info">
       <span class="car-name">{{ car.brand }} {{ car.model }}</span>
       <span class="car-category">{{ car.category }}</span>
     </div>
-    <button class="fav-btn" (click)="toggleFavorite()">
+    <button class="fav-btn" (click)="toggleFavorite($event)">
       @if (isFavorite) {
         <svg width="20" height="20" viewBox="0 0 24 24" fill="#ED3F3F" stroke="#ED3F3F" stroke-width="1.5">
           <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>

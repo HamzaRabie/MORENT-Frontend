@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { Car, CarResponse } from '../models/car.model';
 import { CarFilters } from '../models/filters.model';
+import { CarDetails } from '../models/CarDetails';
 
 @Injectable({
   providedIn: 'root',
@@ -24,4 +25,8 @@ export class CarService {
     
     return this.http.get<CarResponse>(`${environment.apiURL}/cars`,{params});
   }
+
+  getCarById(id: string) {
+  return this.http.get<CarDetails>(`${environment.apiURL}/cars/${id}`);
+}
 }

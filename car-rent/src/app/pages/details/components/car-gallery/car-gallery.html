@@ -1,0 +1,29 @@
+<div class="gallery">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-badge">
+      <span class="badge-title">Sports car with the best</span>
+      <span class="badge-title">design and acceleration</span>
+      <span class="badge-sub">Safety and comfort while driving a futuristic and elegant sports car</span>
+    </div>
+    <img [src]="selectedImage" style="height: 240px !important;" alt="Car" class="hero-img" />
+  </div>
+
+  <!-- Thumbnails -->
+  <div class="thumbnails">
+    <!-- main image as first thumbnail -->
+    <div class="thumb" [class.active]="selectedImage === mainImage"
+         (click)="selectImage(mainImage)">
+      <img [src]="mainImage" alt="Main" />
+    </div>
+
+    @for (img of images; track img) {
+      <div class="thumb" [class.active]="selectedImage === img"
+           (click)="selectImage(img)">
+        <img [src]="img" alt="Gallery" />
+      </div>
+    }
+  </div>
+
+</div>

@@ -1,0 +1,143 @@
+.page {
+  background: #f6f7f9;
+  flex: 1;
+}
+
+.content {
+  display: flex;
+  gap: 24px;
+  padding: 24px;
+  align-items: flex-start;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.top-section {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+}
+
+.car-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.car-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.car-name {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0;
+}
+
+.fav-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.rating-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .stars { display: flex; gap: 2px; }
+  .review-count { font-size: 13px; color: #90a3bf; }
+}
+
+.description {
+  font-size: 14px;
+  color: #596780;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.price {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  .current {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a202c;
+
+    .per {
+      font-size: 13px;
+      font-weight: 400;
+      color: #90a3bf;
+    }
+  }
+
+  .original {
+    font-size: 13px;
+    color: #90a3bf;
+    text-decoration: line-through;
+  }
+}
+
+.rent-btn {
+  background: #3563E9;
+  color: #fff;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s;
+  &:hover { background: #2450c8; }
+}
+
+.car-section {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .section-title { font-size: 16px; font-weight: 600; color: #1a202c; }
+  .view-all { font-size: 13px; color: #3563E9; cursor: pointer; font-weight: 500; }
+}
+
+.car-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .content { flex-direction: column; padding: 16px; }
+  .top-section { grid-template-columns: 1fr; }
+  .car-grid { grid-template-columns: 1fr; }
+}

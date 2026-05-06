@@ -1,0 +1,137 @@
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+// ─── Header ──────────────────────────────────────────
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  .title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a202c;
+  }
+
+  .badge {
+    background: #3563E9;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 20px;
+  }
+}
+
+// ─── Reviews ─────────────────────────────────────────
+.reviews {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.review-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+// ─── User row ────────────────────────────────────────
+.user-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  .user-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a202c;
+  }
+
+  .user-role {
+    font-size: 12px;
+    color: #90a3bf;
+  }
+}
+
+.review-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+
+  .review-date {
+    font-size: 12px;
+    color: #90a3bf;
+  }
+
+  .stars {
+    display: flex;
+    gap: 2px;
+  }
+}
+
+// ─── Comment ─────────────────────────────────────────
+.comment {
+  font-size: 14px;
+  color: #596780;
+  line-height: 1.7;
+  margin: 0;
+  padding-left: 56px; // align with user name
+}
+
+// ─── Show All ────────────────────────────────────────
+.show-all-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #596780;
+  cursor: pointer;
+  padding: 8px;
+  transition: color .2s;
+
+  svg { transition: transform .2s; }
+
+  &:hover { color: #3563E9; }
+}
+
+// ─── Responsive ──────────────────────────────────────
+@media (max-width: 768px) {
+  .card { padding: 16px; }
+
+  .comment { padding-left: 0; }
+
+  .user-row { align-items: flex-start; }
+
+  .review-meta { 
+    align-items: flex-start;
+    flex-direction: row-reverse;
+    gap: 12px;
+  }
+}

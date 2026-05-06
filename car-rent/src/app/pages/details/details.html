@@ -1,0 +1,98 @@
+@if (selectedCar) {
+<div class="page">
+  <div class="content">
+
+    <!-- Sidebar -->
+    <app-filter-sidebar (filtersChanged)="onFiltersChanged($event)" />
+
+    <!-- Main -->
+    <div class="main">
+
+      <!-- Top section -->
+      <div class="top-section">
+        <app-car-gallery [mainImage]="mediaUrl + selectedCar.imageUrl"[images]="galleryImages" />
+        <div class="car-info">
+          <div class="car-header">
+            <h1 class="car-name">{{ selectedCar.brand }} {{ selectedCar.model }}</h1>
+            <button class="fav-btn" (click)="toggleFavorite()">
+              @if (isFavorite) {
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#ED3F3F" stroke="#ED3F3F" stroke-width="1.5">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+              } @else {
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#90A3BF" stroke-width="1.5">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+              }
+            </button>
+          </div>
+
+          <!-- Stars -->
+          <div class="rating-row">
+            <div class="stars">
+              @for (filled of stars; track $index) {
+                <svg width="16" height="16" viewBox="0 0 24 24"
+                     [attr.fill]="filled ? '#FBAD39' : 'none'"
+                     [attr.stroke]="filled ? '#FBAD39' : '#90A3BF'"
+                     stroke-width="1.5">
+                  <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
+                </svg>
+              }
+            </div>
+            <span class="review-count">{{ selectedCar.reviewCount }}+ Reviewer</span>
+          </div>
+
+          <p class="description">{{ selectedCar.description }}</p>
+
+          <app-car-specs [car]="selectedCar" />
+
+          <!-- Price + Rent -->
+          <div class="price-row">
+            <div class="price">
+              <span class="current">{{ selectedCar.pricePerDay | currency }}<span class="per">/days</span></span>
+              @if (selectedCar.originalPrice) {
+                <span class="original">{{ selectedCar.originalPrice | currency }}</span>
+              }
+            </div>
+            <button class="rent-btn" (click)="rentNow()">Rent Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reviews -->
+      <app-review-list [reviews]="selectedCar.reviews" [total]="selectedCar.reviewCount" />
+
+      <!-- Recent Cars -->
+      @if (recentCars.length > 0) {
+        <div class="car-section">
+          <div class="section-header">
+            <span class="section-title">Recent Car</span>
+            <span class="view-all">View All</span>
+          </div>
+          <div class="car-grid">
+            @for (car of recentCars; track car.id) {
+              <app-car-card [car]="car" (click)="onCarClicked(car.id)" />
+            }
+          </div>
+        </div>
+      }
+
+      <!-- Recommended Cars -->
+      @if (recommendedCars.length > 0) {
+        <div class="car-section">
+          <div class="section-header">
+            <span class="section-title">Recommendation Car</span>
+            <span class="view-all">View All</span>
+          </div>
+          <div class="car-grid">
+            @for (car of recommendedCars; track car.id) {
+              <app-car-card [car]="car" (click)="onCarClicked(car.id)" />
+            }
+          </div>
+        </div>
+      }
+
+    </div>
+  </div>
+</div>
+}

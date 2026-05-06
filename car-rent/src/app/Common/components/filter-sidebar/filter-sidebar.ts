@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CarFilters } from '../../../../models/filters.model';
+import { CarFilters } from '../../../models/filters.model';
 
 @Component({
   selector: 'app-filter-sidebar',

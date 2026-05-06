@@ -1,0 +1,37 @@
+.specs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 32px;
+}
+
+.spec-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+
+  .spec-label {
+    font-size: 14px;
+    color: #90a3bf;
+    font-weight: 500;
+  }
+
+  .spec-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a202c;
+  }
+}
+
+@media (max-width: 768px) {
+  .specs-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .spec-item {
+    background: #f6f7f9;
+    border-radius: 8px;
+    padding: 10px 14px;
+  }
+}

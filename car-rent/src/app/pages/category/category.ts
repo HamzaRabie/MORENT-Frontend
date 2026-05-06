@@ -1,9 +1,9 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CarService } from '../../services/car-service';
 import { Car } from '../../models/car.model';
-import { CarCard } from "./components/car-card/car-card";
+import { CarCard } from "../../Common/components/car-card/car-card";
 import { CarFilters } from '../../models/filters.model';
-import { FilterSidebar } from './components/filter-sidebar/filter-sidebar';
+import { FilterSidebar } from '../../Common/components/filter-sidebar/filter-sidebar';
 
 @Component({
   selector: 'app-category',

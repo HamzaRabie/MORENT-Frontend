@@ -1,0 +1,57 @@
+<div class="card">
+
+  <!-- Header -->
+  <div class="header">
+    <span class="title">Reviews</span>
+    <span class="badge">{{ total }}</span>
+  </div>
+
+  <!-- Reviews -->
+  <div class="reviews">
+    @for (review of visibleReviews; track review.id) {
+      <div class="review-item">
+
+        <!-- User -->
+        <div class="user-row">
+          <img [src]="review.userAvatar" [alt]="review.userName"
+               class="avatar"
+               onerror="this.src='https://i.pravatar.cc/40'" />
+          <div class="user-info">
+            <span class="user-name">{{ review.userName }}</span>
+            <span class="user-role">{{ review.userRole }}</span>
+          </div>
+          <div class="review-meta">
+            <span class="review-date">{{ review.createdAt | date: 'd MMM yyyy' }}</span>
+            <div class="stars">
+              @for (filled of stars(review.rating); track $index) {
+                <svg width="14" height="14" viewBox="0 0 24 24"
+                     [attr.fill]="filled ? '#FBAD39' : 'none'"
+                     [attr.stroke]="filled ? '#FBAD39' : '#90A3BF'"
+                     stroke-width="1.5">
+                  <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
+                </svg>
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- Comment -->
+        <p class="comment">{{ review.comment }}</p>
+
+      </div>
+    }
+  </div>
+
+  <!-- Show All -->
+  @if (reviews.length > 2) {
+    <button class="show-all-btn" (click)="toggleShowAll()">
+      {{ showAll ? 'Show Less' : 'Show All' }}
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2"
+           [style.transform]="showAll ? 'rotate(180deg)' : 'rotate(0)'">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </button>
+  }
+
+</div>
