@@ -33,7 +33,6 @@ export class DetailsRental {
       attribution: '© OpenStreetMap'
     }).addTo(this.map);
 
-    // fix leaflet marker icons (common Angular issue)
     const iconDefault = L.icon({
       iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
       shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',

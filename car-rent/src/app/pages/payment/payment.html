@@ -16,28 +16,32 @@
         <div class="form-grid" formGroupName="billing">
           <div class="field">
             <label>Name</label>
-            <input formControlName="name" placeholder="Your name" [class.error]="isInvalid('billing','name')" />
+            <input formControlName="name" placeholder="Your name"
+                   [class.error]="isInvalid('billing','name')" />
             @if (isInvalid('billing','name')) {
               <span class="error-text">Name is required</span>
             }
           </div>
           <div class="field">
             <label>Phone Number</label>
-            <input formControlName="phone" placeholder="Phone number" [class.error]="isInvalid('billing','phone')" />
+            <input formControlName="phone" placeholder="Phone number"
+                   [class.error]="isInvalid('billing','phone')" />
             @if (isInvalid('billing','phone')) {
               <span class="error-text">Phone is required</span>
             }
           </div>
           <div class="field">
             <label>Address</label>
-            <input formControlName="address" placeholder="Address" [class.error]="isInvalid('billing','address')" />
+            <input formControlName="address" placeholder="Address"
+                   [class.error]="isInvalid('billing','address')" />
             @if (isInvalid('billing','address')) {
               <span class="error-text">Address is required</span>
             }
           </div>
           <div class="field">
             <label>Town / City</label>
-            <input formControlName="city" placeholder="Town or city" [class.error]="isInvalid('billing','city')" />
+            <input formControlName="city" placeholder="Town or city"
+                   [class.error]="isInvalid('billing','city')" />
             @if (isInvalid('billing','city')) {
               <span class="error-text">City is required</span>
             }
@@ -50,105 +54,112 @@
         <div class="card-header">
           <div>
             <h3 class="card-title">Rental Info</h3>
-            <p class="card-sub">Please select your rental date</p>
+            <p class="card-sub">Please select your rental date and time</p>
           </div>
           <span class="step">Step 2 of 4</span>
         </div>
 
-    <div formGroupName="rental">
+        <div formGroupName="rental">
 
-  <!-- Pick-Up -->
-    <div class="rental-section">
-        <div class="rental-label" (click)="togglePickup()" style="cursor:pointer">
-            <span class="dot blue"></span>
-            <span>Pick - Up</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" style="margin-left:auto"
-                [style.transform]="showPickup ? 'rotate(180deg)' : 'rotate(0)'">
+          <!-- Pick-Up -->
+          <div class="rental-section">
+            <div class="rental-label" (click)="togglePickup()">
+              <span class="dot blue"></span>
+              <span>Pick - Up</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2"
+                   [style.transform]="showPickup ? 'rotate(180deg)' : 'rotate(0)'">
                 <polyline points="6 9 12 15 18 9"/>
-            </svg>
-        </div>
+              </svg>
+            </div>
 
-         @if (showPickup) {
-      <div class="form-grid">
+            @if (showPickup) {
+              <div class="form-grid">
+                <div class="field">
+                  <label>Location</label>
+                  <select formControlName="pickupLocation"
+                          (change)="onPickupLocationChange($event)"
+                          [class.error]="isInvalid('rental','pickupLocation')">
+                    <option value="" disabled selected>Select your city</option>
+                    @for (loc of locations; track loc.id) {
+                      <option [value]="loc.id">{{ loc.city }}</option>
+                    }
+                  </select>
+                  @if (isInvalid('rental','pickupLocation')) {
+                    <span class="error-text">Location is required</span>
+                  }
+                </div>
+                <div class="field">
+                  <label>Date</label>
+                  <input type="date" formControlName="pickupDate"
+                         [class.error]="isInvalid('rental','pickupDate')" />
+                  @if (isInvalid('rental','pickupDate')) {
+                    <span class="error-text">Date is required</span>
+                  }
+                </div>
+                <div class="field">
+                  <label>Time</label>
+                  <input type="time" formControlName="pickupTime"
+                         [class.error]="isInvalid('rental','pickupTime')" />
+                  @if (isInvalid('rental','pickupTime')) {
+                    <span class="error-text">Time is required</span>
+                  }
+                </div>
+              </div>
+            }
+          </div>
 
-        <div class="field">
-  <label>Locations</label>
-  <select formControlName="pickupLocation"
-          (change)="onPickupLocationChange($event)"
-          [class.error]="isInvalid('rental','pickupLocation')">
-    <option value="" disabled selected>Select your city</option>
-    @for (loc of locations; track loc.id) {
-      <option [value]="loc.id">{{ loc.city }}</option>
-    }
-  </select>
-  @if (isInvalid('rental','pickupLocation')) {
-    <span class="error-text">Location is required</span>
-  }
-</div>
-
-
-        <div class="field">
-          <label>Date</label>
-          <input type="date" formControlName="pickupDate"
-                 [class.error]="isInvalid('rental','pickupDate')" />
-        </div>
-        <div class="field">
-          <label>Time</label>
-          <input type="time" formControlName="pickupTime"
-                 [class.error]="isInvalid('rental','pickupTime')" />
-        </div>
-      </div>
-        }
-    </div>
-
-  <!-- Drop-Off -->
-    <div class="rental-section">
-        <div class="rental-label" (click)="toggleDropoff()" style="cursor:pointer">
-            <span class="dot gray"></span>
-            <span>Drop - Off</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" style="margin-left:auto"
-                [style.transform]="showDropoff ? 'rotate(180deg)' : 'rotate(0)'">
+          <!-- Drop-Off -->
+          <div class="rental-section">
+            <div class="rental-label" (click)="toggleDropoff()">
+              <span class="dot gray"></span>
+              <span>Drop - Off</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2"
+                   [style.transform]="showDropoff ? 'rotate(180deg)' : 'rotate(0)'">
                 <polyline points="6 9 12 15 18 9"/>
-            </svg>
-    </div>
+              </svg>
+            </div>
 
-    @if (showDropoff) {
-      <div class="form-grid">
+            @if (showDropoff) {
+              <div class="form-grid">
+                <div class="field">
+                  <label>Location</label>
+                  <select formControlName="dropoffLocation"
+                          (change)="onDropoffLocationChange($event)"
+                          [class.error]="isInvalid('rental','dropoffLocation')">
+                    <option value="" disabled selected>Select your city</option>
+                    @for (loc of locations; track loc.id) {
+                      <option [value]="loc.id">{{ loc.city }}</option>
+                    }
+                  </select>
+                  @if (isInvalid('rental','dropoffLocation')) {
+                    <span class="error-text">Location is required</span>
+                  }
+                </div>
+                <div class="field">
+                  <label>Date</label>
+                  <input type="date" formControlName="dropoffDate"
+                         [class.error]="isInvalid('rental','dropoffDate')" />
+                  @if (isInvalid('rental','dropoffDate')) {
+                    <span class="error-text">Date is required</span>
+                  }
+                </div>
+                <div class="field">
+                  <label>Time</label>
+                  <input type="time" formControlName="dropoffTime"
+                         [class.error]="isInvalid('rental','dropoffTime')" />
+                  @if (isInvalid('rental','dropoffTime')) {
+                    <span class="error-text">Time is required</span>
+                  }
+                </div>
+              </div>
+            } @else {
+              <p class="disabled-msg">Click to add drop-off details</p>
+            }
+          </div>
 
-        <div class="field">
-  <label>Locations</label>
-  <select formControlName="dropoffLocation"
-          (change)="onDropoffLocationChange($event)"
-          [class.error]="isInvalid('rental','dropoffLocation')">
-    <option value="" disabled selected>Select your city</option>
-    @for (loc of locations; track loc.id) {
-      <option [value]="loc.id">{{ loc.city }}</option>
-    }
-  </select>
-  @if (isInvalid('rental','dropoffLocation')) {
-    <span class="error-text">Location is required</span>
-  }
-</div>
-        
-        <div class="field">
-          <label>Date</label>
-          <input type="date" formControlName="dropoffDate"
-                 [class.error]="isInvalid('rental','dropoffDate')" />
         </div>
-        <div class="field">
-          <label>Time</label>
-          <input type="time" formControlName="dropoffTime"
-                 [class.error]="isInvalid('rental','dropoffTime')" />
-        </div>
-      </div>
-    } @else {
-      <p class="disabled-msg">Click to add drop-off details</p>
-    }
-    </div>
-
-    </div>
 
         @if (isUnavailable) {
           <div class="error-msg">
@@ -172,7 +183,8 @@
              (click)="selectMethod('Credit Card')">
           <div class="method-header">
             <div class="method-left">
-              <input type="radio" [checked]="selectedMethod === 'Credit Card'" />
+              <input type="radio" [checked]="selectedMethod === 'Credit Card'"
+                     (click)="$event.stopPropagation()" />
               <span>Credit Card</span>
             </div>
             <div class="method-icons">💳</div>
@@ -182,23 +194,35 @@
             <div class="form-grid" formGroupName="card">
               <div class="field">
                 <label>Card Number</label>
-                <input formControlName="number" placeholder="Card number" maxlength="19"
-                       [class.error]="isInvalid('card','number')" />
+                <input formControlName="number" placeholder="Card number"
+                       maxlength="19" [class.error]="isInvalid('card','number')" />
+                @if (isInvalid('card','number')) {
+                  <span class="error-text">Card number is required</span>
+                }
               </div>
               <div class="field">
                 <label>Expiration Date</label>
                 <input formControlName="expiry" placeholder="DD/MM/YY"
                        [class.error]="isInvalid('card','expiry')" />
+                @if (isInvalid('card','expiry')) {
+                  <span class="error-text">Expiry is required</span>
+                }
               </div>
               <div class="field">
                 <label>Card Holder</label>
                 <input formControlName="holder" placeholder="Card holder"
                        [class.error]="isInvalid('card','holder')" />
+                @if (isInvalid('card','holder')) {
+                  <span class="error-text">Card holder is required</span>
+                }
               </div>
               <div class="field">
                 <label>CVC</label>
-                <input formControlName="cvc" placeholder="CVC" maxlength="3"
-                       [class.error]="isInvalid('card','cvc')" />
+                <input formControlName="cvc" placeholder="CVC"
+                       maxlength="3" [class.error]="isInvalid('card','cvc')" />
+                @if (isInvalid('card','cvc')) {
+                  <span class="error-text">CVC is required</span>
+                }
               </div>
             </div>
           }
@@ -209,7 +233,8 @@
              (click)="selectMethod('PayPal')">
           <div class="method-header">
             <div class="method-left">
-              <input type="radio" [checked]="selectedMethod === 'PayPal'" />
+              <input type="radio" [checked]="selectedMethod === 'PayPal'"
+                     (click)="$event.stopPropagation()" />
               <span>PayPal</span>
             </div>
             <span class="paypal-text">PayPal</span>
@@ -221,7 +246,8 @@
              (click)="selectMethod('Bitcoin')">
           <div class="method-header">
             <div class="method-left">
-              <input type="radio" [checked]="selectedMethod === 'Bitcoin'" />
+              <input type="radio" [checked]="selectedMethod === 'Bitcoin'"
+                     (click)="$event.stopPropagation()" />
               <span>Bitcoin</span>
             </div>
             <span class="bitcoin-text">bitcoin</span>
@@ -250,15 +276,30 @@
           </label>
         </div>
 
-        <button class="rent-btn"
-                type="button"
+        @if (errorMessage) {
+  <div class="error-banner">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="10"/>
+      <line x1="12" y1="8" x2="12" y2="12"/>
+      <line x1="12" y1="16" x2="12.01" y2="16"/>
+    </svg>
+    {{ errorMessage }}
+  </div>
+}
+        <button class="rent-btn" type="button"
                 [disabled]="!confirmation.get('terms')?.value || isLoading"
                 (click)="onRentNow()">
-          {{ isLoading ? 'Processing...' : 'Rent Now' }}
+          @if (isLoading) {
+            <span class="spinner"></span> Processing...
+          } @else {
+            Rent Now
+          }
         </button>
 
         <div class="safe-msg">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#90a3bf" stroke-width="1.5">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+               stroke="#90a3bf" stroke-width="1.5">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
           </svg>
           <div>
@@ -272,13 +313,16 @@
   </div>
 
   <!-- Right — Rental Summary -->
-  <div class="right" >
-    <div class="card">
+  <div class="right">
+    <div class="card summary-card">
       <h3 class="card-title">Rental Summary</h3>
       <p class="card-sub">Prices may change depending on the length of the rental and the price of your rental car.</p>
 
+      <!-- Car -->
       <div class="summary-car">
-        <img [src]="mediaUrl + car.imageUrl" [alt]="car.brand + ' ' + car.model" class="summary-img" />
+        <img [src]="mediaUrl + car.imageUrl"
+             [alt]="car.brand + ' ' + car.model"
+             class="summary-img" />
         <div class="summary-info">
           <span class="summary-name">{{ car.brand }} {{ car.model }}</span>
           <div class="summary-stars">
@@ -297,15 +341,34 @@
 
       <div class="divider"></div>
 
+      <!-- Price breakdown -->
+      <div class="price-row">
+        <span class="price-label">Price per hour</span>
+        <span class="price-value">{{ pricePerHour | currency }}</span>
+      </div>
+
+      <div class="price-row">
+        <span class="price-label">Duration</span>
+        <span class="price-value">
+          @if (totalHours > 0) {
+            {{ totalHours }} hrs
+          } @else {
+            — 
+          }
+        </span>
+      </div>
+
       <div class="price-row">
         <span class="price-label">Subtotal</span>
         <span class="price-value">{{ subtotal | currency }}</span>
       </div>
+
       <div class="price-row">
         <span class="price-label">Tax</span>
         <span class="price-value">$0</span>
       </div>
 
+      <!-- Promo -->
       <div class="promo-row">
         <input placeholder="Apply promo code" class="promo-input" />
         <button class="promo-btn" type="button">Apply now</button>
@@ -313,6 +376,7 @@
 
       <div class="divider"></div>
 
+      <!-- Total -->
       <div class="total-row">
         <div>
           <span class="total-label">Total Rental Price</span>
@@ -320,6 +384,7 @@
         </div>
         <span class="total-price">{{ subtotal | currency }}</span>
       </div>
+
     </div>
   </div>
 

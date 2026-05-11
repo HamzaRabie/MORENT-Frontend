@@ -15,7 +15,7 @@ import { Location } from '../../models/Location';
   imports: [ReactiveFormsModule, CurrencyPipe],
   templateUrl: './payment.html',
   styleUrl: './payment.scss',
-})
+})  
 export class Payment implements OnInit {
   showPickup = true;
   showDropoff = false;
@@ -28,7 +28,7 @@ export class Payment implements OnInit {
   locations: Location[] = [];
   selectedPickupLocation: Location | null = null;
   selectedDropoffLocation: Location | null = null;
-
+  errorMessage = '';
   constructor(
     private route: ActivatedRoute,private router: Router, private fb: FormBuilder, private carService: CarService,
     private locationService: LocationService, private paymentService: PaymentService , private cdr: ChangeDetectorRef,){
@@ -110,17 +110,27 @@ export class Payment implements OnInit {
   get card()    { return this.form.get('card')     as FormGroup; }
   get confirmation() { return this.form.get('confirmation') as FormGroup; }
 
-  get totalDays(): number {
-    const pickup  = this.rental.get('pickupDate')?.value;
-    const dropoff = this.rental.get('dropoffDate')?.value;
-    if (!pickup || !dropoff) return 1;
-    const diff = new Date(dropoff).getTime() - new Date(pickup).getTime();
-    return Math.max(1, Math.ceil(diff / (1000 * 60 * 60 * 24)));
-  }
+get pricePerHour(): number {
+  return (this.car?.pricePerDay ?? 0) / 24;
+}
 
-    get subtotal(): number {
-    return (this.car?.pricePerDay ?? 0) * this.totalDays;
-  }
+get totalHours(): number {
+  const pickup      = this.form.get('rental.pickupDate')?.value;
+  const dropoff     = this.form.get('rental.dropoffDate')?.value;
+  const pickupTime  = this.form.get('rental.pickupTime')?.value  || '00:00';
+  const dropoffTime = this.form.get('rental.dropoffTime')?.value || '00:00';
+
+  if (!pickup || !dropoff) return 0;
+
+  const start = new Date(`${pickup}T${pickupTime}`);
+  const end   = new Date(`${dropoff}T${dropoffTime}`);
+  const diff  = (end.getTime() - start.getTime()) / (1000 * 60 * 60);
+  return Math.max(0, Math.round(diff * 10) / 10);
+}
+
+get subtotal(): number {
+  return Math.round(this.pricePerHour * this.totalHours * 100) / 100;
+}
 
   get stars() {
     return Array(5).fill(0).map((_, i) => i < Math.round(this.car?.rating ?? 0));
@@ -174,18 +184,38 @@ export class Payment implements OnInit {
     phone: b.phone,
     address: b.address,
     city: b.city
-};
+  };
 
     this.paymentService.createPayment(dto).subscribe({
-      next: () => {
-        this.isLoading = false;
-        this.router.navigate(['/dashboard']);
-      },
-      error: (err) => {
-        this.isLoading = false;
-        if (err.status === 409) this.isUnavailable = true;
-      }
-    });
+    next: () => {
+      this.isLoading = false;
+      this.router.navigate(['/dashboard']);
+    },
+    error: (err) => {
+    this.isLoading = false;
+
+  console.log(err);
+
+  if (err.status === 409) {
+    this.isUnavailable = true;
+    this.errorMessage =
+      err.error ?? 'Car is not available for selected dates.';
+  }
+  else if (err.status === 404) {
+    this.errorMessage =
+      err.error ?? 'Car not found. Please go back and try again.';
+  }
+  else if (err.status === 400) {
+    this.errorMessage =
+      err.error ?? 'Invalid request. Please check your details.';
+  }
+  else {
+    this.errorMessage =
+      err.error ?? 'Something went wrong. Please try again.';
+  }
+   this.cdr.detectChanges();
+}
+  });
   }
 
 }
